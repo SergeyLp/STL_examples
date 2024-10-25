@@ -10,14 +10,14 @@
 class AddressBook
 {
 public:
-  AddressBook();
-  ~AddressBook();
+  AddressBook() = default;
+  ~AddressBook() = default;
 
   // Exception classes
   class AddressNotFound { };
   class DuplicateId { };
 
-  int insertAddress(const Address& addr, int recordId = 0) throw (DuplicateId);
+  int insertAddress(const Address& addr, int recordId = 0) throw (DuplicateId); //-V1071
   void eraseAddress(int recordId) throw (AddressNotFound);
   void replaceAddress(const Address& addr, int recordId = 0) throw (AddressNotFound);
   const Address& getAddress(int recordId) const throw (AddressNotFound);

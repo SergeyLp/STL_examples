@@ -1,3 +1,5 @@
+// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+//PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 #include "AddressBook.h"
 TEST(Book, Create) {
   AddressBook book;
@@ -44,10 +46,12 @@ TEST(Book, Insert) {
   // Insert address with duplicate name
   const int d_id = book.insertAddress(d);
 
-
   ASSERT_NE(c_id, d_id);
+
+  ASSERT_THROW(book.insertAddress(d, a_id), AddressBook::DuplicateId);
 }
 
+#pragma warning( disable : 26495)
 class TestBook : public ::testing::Test {
 protected:
   void SetUp() {

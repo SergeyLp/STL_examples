@@ -1,3 +1,5 @@
+// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+//PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 // TinyPIM (c) 1999 Pablo Halpern. File AddressBook.cpp
 #ifndef USED_PRECOMPILE
 #include <iostream> // For print() function
@@ -6,14 +8,6 @@
 #include "AddressBook.h"
 
 int AddressBook::nextId_ = 1;
-
-AddressBook::AddressBook()
-{
-}
-
-AddressBook::~AddressBook()
-{
-}
 
 int AddressBook::insertAddress(const Address& addr, int recordId)
 {
@@ -27,7 +21,7 @@ int AddressBook::insertAddress(const Address& addr, int recordId)
     try {
       getById(recordId);
       throw DuplicateId();
-    } catch (AddressNotFound) { }
+    } catch (AddressNotFound&) { } //-V565
 
   addresses_.push_back(addr);
 

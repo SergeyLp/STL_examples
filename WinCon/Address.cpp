@@ -1,77 +1,24 @@
 // TinyPIM (c) 1999 Pablo Halpern, File Address.cpp
+
 #include "Address.h"
 
-// Destructor
-Address::~Address()
+void Address::lastname(const std::string& s)
 {
-  // Clean up memory
-  delete[] lastname_;
-  delete[] firstname_;
-  delete[] phone_;
-  delete[] address_;
+  lastname_ = s;
 }
 
-char* Address::dup(const char* s)
+void Address::firstname(const std::string& s)
 {
-  // Allocate space for string, including NUL terminator
-  char* ret = new char[strlen(s) + 1];
-
-  // Copy contents into newly allocated string
-  strcpy(ret, s);
-
-  return ret;
+  firstname_ = s;
 }
 
-// Copy constructor
-Address::Address(const Address& a2)
-  : lastname_(nullptr), firstname_(nullptr), phone_(nullptr), address_(nullptr)
+void Address::phone(const std::string& s)
 {
-  // Use assignment operator to do the hard work
-  *this = a2;
+  phone_ = s;
 }
 
-// Assignment operator
-const Address& Address::operator=(const Address& a2)
+void Address::address(const std::string& s)
 {
-  if (this != &a2)
-  {
-    lastname(a2.lastname_);
-    firstname(a2.firstname_);
-    phone(a2.phone_);
-    address(a2.address_);
-  }
-
-  return *this;
+  address_ = s;
 }
 
-void Address::lastname(const char* s) {
-  assert(lastname_ != s);
-
-  delete[] lastname_;
-  lastname_ = dup(s);
-}
-
-void Address::firstname(const char* s) {
-  assert(firstname_ != s);
-
-  delete[] firstname_;
-  firstname_ = dup(s);
-}
-
-void Address::phone(const char* s)
-{
-  if (phone_ != s)
-  {
-    delete[] phone_;
-    phone_ = dup(s);
-  }
-}
-
-void Address::address(const char* s)
-{
-  if (address_ != s)
-  {
-    delete[] address_;
-    address_ = dup(s);
-  }
-}

@@ -4,36 +4,32 @@
 #ifndef USED_PRECOMPILE
 #include <iostream> // For print() function
 #endif // !USED_PRECOMPILE
-
 #include "AddressBook.h"
 
 int AddressBook::nextId_ = 1;
 
-int AddressBook::insertAddress(const Address& addr, int recordId)
-{
-  if (recordId == 0)
+int AddressBook::insertAddress(const Address& addr, int recordId) {
+  if (recordId == 0){
     // If recordId is not specified, create a new record id.
     recordId = nextId_++;
-  else if (recordId >= nextId_)
+  }
+  else if (recordId >= nextId_) {
     // Make sure nextId is always higher than any known record id.
     nextId_ = recordId + 1;
-  else
+  }else
     try {
       getById(recordId);
       throw DuplicateId();
-    } catch (AddressNotFound&) { } //-V565
+    }
+    catch (AddressNotFound&) { } //-V565
 
   addresses_.push_back(addr);
-
-  // Assign an Id to the record
   addresses_.back().recordId(recordId);
 
   return recordId;
-    
 }
 
-int AddressBook::getById(int recordId) const
-{
+int AddressBook::getById(int recordId) const {
   for (int i = 0; i < addresses_.size(); ++i)
     if (addresses_[i].recordId() == recordId)
       return i;
@@ -41,7 +37,7 @@ int AddressBook::getById(int recordId) const
   throw AddressNotFound();
 }
 
-void AddressBook::eraseAddress(int recordId) throw (AddressNotFound) {
+void AddressBook::eraseAddress(int recordId){
   const int index = getById(recordId);
 
   // Move element from end of vector to location being erased.
@@ -51,32 +47,24 @@ void AddressBook::eraseAddress(int recordId) throw (AddressNotFound) {
   addresses_.pop_back();
 }
 
-void AddressBook::replaceAddress(const Address& addr, int recordId)
-  throw (AddressNotFound)
-{
+void AddressBook::replaceAddress(const Address& addr, int recordId){
   if (recordId == 0)
     recordId = addr.recordId();
 
-  int index = getById(recordId);
+  const int index = getById(recordId);
 
   addresses_[index] = addr;
   addresses_[index].recordId(recordId);
 }
 
-const Address& AddressBook::getAddress(int recordId) const
-  throw (AddressNotFound)
-{
-  int index = getById(recordId);
-
-  return addresses_[index];
+const Address& AddressBook::getAddress(int recordId) const{
+  return addresses_[getById(recordId)];
 }
 
 void AddressBook::print() const
 {
   std::cout << "******************************************\n";
-  for (int i = 0; i < addresses_.size(); ++i)
-  {
-    const Address& a = addresses_[i];
+  for (const auto& a: addresses_) {
     std::cout << "Record Id: " << a.recordId() << '\n'
               << a.firstname() << ' ' << a.lastname() << '\n'
               << a.address() << '\n' << a.phone() << '\n' 

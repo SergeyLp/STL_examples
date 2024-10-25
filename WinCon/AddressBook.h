@@ -17,10 +17,10 @@ public:
   class AddressNotFound { };
   class DuplicateId { };
 
-  int insertAddress(const Address& addr, int recordId = 0) throw (DuplicateId); //-V1071
-  void eraseAddress(int recordId) throw (AddressNotFound);
-  void replaceAddress(const Address& addr, int recordId = 0) throw (AddressNotFound);
-  const Address& getAddress(int recordId) const throw (AddressNotFound);
+  int insertAddress(const Address& addr, int recordId = 0); //-V1071
+  void eraseAddress(int recordId);
+  void replaceAddress(const Address& addr, int recordId = 0);
+  const Address& getAddress(int recordId) const;
 
   // Test routine to print out contents of address book
   void print() const;
@@ -36,5 +36,5 @@ private:
   // Get the index of the record with the specified ID.
   // Returns notFound if not found.
   int getById(int recordId) const;
-  const int notFound = -1 ;
+  const int notFound = 0;//-1 ;
 };

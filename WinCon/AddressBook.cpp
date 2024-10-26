@@ -30,31 +30,14 @@ int AddressBook::insertAddress(const Address& addr, int recordId) {
 }
 
 void AddressBook::eraseAddress(int recordId){
-  auto i = addresses_.begin();
-  for (; i != addresses_.end(); ++i) {
-    if (i->recordId() == recordId)
-      break;
-  }
-
-  if (i == addresses_.end())
-    throw AddressNotFound();
-
-  addresses_.erase(i);
+  addresses_.erase(getById(recordId));
 }
 
 void AddressBook::replaceAddress(const Address& addr, int recordId){
   if (recordId == 0)
     recordId = addr.recordId();
 
-  auto i = addresses_.begin();
-  for (; i != addresses_.end(); ++i) {
-    if (i->recordId() == recordId)
-      break;
-  }
-
-  if (i == addresses_.end())
-    throw AddressNotFound();
-
+  auto i = getById(recordId);
   *i = addr;
   i->recordId(recordId);
 }

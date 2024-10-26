@@ -3,7 +3,7 @@
 #pragma warning( disable : 5040 5043 4290)
 
 #ifndef USED_PRECOMPILE
-#include <vector>
+#include <list>
 #endif // !USED_PRECOMPILE
 #include "Address.h"
 
@@ -31,10 +31,14 @@ private:
   AddressBook& operator=(const AddressBook&) = delete;
 
   static int nextId_;
-  std::vector<Address> addresses_;
+
+  typedef std::list<Address> addrlist;
+  addrlist addresses_;
 
   // Get the index of the record with the specified ID.
-  // Returns notFound if not found.
-  int getById(int recordId) const;
-  const int notFound = 0;//-1 ;
+  // Returns end() if not found.
+  addrlist::iterator       getById(int recordId);
+  addrlist::const_iterator getById(int recordId) const;
+    
+//  const int notFound = -1; //0;//
 };

@@ -42,9 +42,9 @@ void AddressBook::replaceAddress(const Address& addr, int recordId){
   if (recordId == 0)
     recordId = addr.recordId();
 
-  auto i = getById(recordId);
-  *i = addr;
-  i->recordId(recordId);
+  ///TODO: Check changed 
+  eraseAddress(recordId);
+  insertAddress(addr, recordId);
 }
 
 const Address& AddressBook::getAddress(int recordId) const{

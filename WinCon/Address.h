@@ -5,8 +5,7 @@
 #endif // USED_PRECOMPILE
 
 // Address class implemented using std::string class
-class Address
-{
+class Address {
 public:
   // Default constructor initializes recordId to 0
   // and all strings to empty.
@@ -33,8 +32,6 @@ public:
   std::string address() const { return address_; }
   void address(const std::string&);
 
-  auto operator<=>(const Address&) const = default;
-
 private:
   // Data Fields
   int         recordId_;
@@ -44,7 +41,5 @@ private:
   std::string address_;
 };
 
-//bool operator==(const Address&, const Address&);
-//bool operator< (const Address&, const Address&);
-//
-//using namespace std::rel_ops;
+bool operator==(const Address&, const Address&);
+bool operator< (const Address&, const Address&);

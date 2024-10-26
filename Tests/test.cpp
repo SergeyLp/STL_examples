@@ -126,10 +126,8 @@ TEST_F(TestBook, Get) {
   const int aa_id = book->insertAddress(aa);
 
   const Address aa_ = book->getAddress(aa_id);
-  ASSERT_EQ(aa.lastname(), aa_.lastname());
-  ASSERT_EQ(aa.firstname(), aa_.firstname());
-  ASSERT_EQ(aa.phone(), aa_.phone());
-  ASSERT_EQ(aa.address(),aa_.address());
+  
+  ASSERT_EQ(aa, aa_);
 }
 
 TEST_F(TestBook, Replace) {

@@ -39,6 +39,4 @@ private:
   // Returns end() if not found.
   addrlist::iterator       getById(int recordId);
   addrlist::const_iterator getById(int recordId) const;
-    
-//  const int notFound = -1; //0;//
 };

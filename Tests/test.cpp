@@ -1,6 +1,21 @@
 // This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 //PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 #include "AddressBook.h"
+
+TEST(CAddress, eq) {
+  Address a;
+  a.lastname("Smith");
+  a.firstname("Joan");
+  a.phone("(617) 555-9876");
+  a.address("The Very Big Corporation\nSomewhere, MA 01000");
+
+  Address b(a);
+  ASSERT_EQ(a, b);
+
+  Address c(a);
+  c.firstname("Joan ");
+  ASSERT_NE(a, c);
+}
 TEST(Book, Create) {
   AddressBook book;
   SUCCEED();

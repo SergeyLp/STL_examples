@@ -1,9 +1,5 @@
 // TinyPIM (c) 1999 Pablo Halpern. File Address.h
-
-#ifndef Address_dot_h
-#define Address_dot_h 1
-
-
+#pragma once
 #ifndef USED_PRECOMPILE
 #include <string>
 #endif // USED_PRECOMPILE
@@ -37,6 +33,8 @@ public:
   std::string address() const { return address_; }
   void address(const std::string&);
 
+  auto operator<=>(const Address&) const = default;
+
 private:
   // Data Fields
   int         recordId_;
@@ -46,4 +44,7 @@ private:
   std::string address_;
 };
 
-#endif // Address_dot_h
+//bool operator==(const Address&, const Address&);
+//bool operator< (const Address&, const Address&);
+//
+//using namespace std::rel_ops;

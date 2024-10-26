@@ -22,9 +22,14 @@ int AddressBook::insertAddress(const Address& addr, int recordId) {
         throw DuplicateId();
     }
   }
-    
-  addresses_.push_back(addr);
-  addresses_.back().recordId(recordId);
+
+  addrlist::iterator i = addresses_.begin();
+  for ( ; i != addresses_.end(); ++i)
+    if (addr < *i)
+      break;
+
+  i = addresses_.insert(i, addr);
+  i->recordId(recordId);
 
   return recordId;
 }
